@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+<name>Buddy Links Everywhere</name>
+<id>Dougiefresh:BuddyLinks</id>
+<version>1.0</version>
+
+<file name="$sourcedir/Admin.php">
+	<operation>
+		<search position="replace"><![CDATA[function AdminMain()]]></search>
+		<add><![CDATA[function AdminMain($menu_only = false)]]></add>
+	</operation>
+	<operation>
+		<search position="after"><![CDATA[// Make sure the administrator has a valid session...]]></search>
+		<add><![CDATA[// If we are only requesting the admin menu, return to caller:
+	if ($menu_only)
+		return $admin_areas;
+		
+	]]></add>
+	</operation>
+</file>
+</modification>
