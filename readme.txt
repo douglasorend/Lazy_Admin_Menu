@@ -1,5 +1,5 @@
 [hr]
-[center][color=red][size=16pt][b]LAZY ADMIN MENU v1.7[/b][/size][/color]
+[center][color=red][size=16pt][b]LAZY ADMIN MENU v1.8[/b][/size][/color]
 [url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=http://custom.simplemachines.org/mods/index.php?mod=3901]Link to Mod[/url]
 [/center]
 [hr]
@@ -22,6 +22,9 @@ The admin menu on the menu will not be replaced while you are in the Admin area.
 
 [color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
 [quote]
+[b][u]v1.8 - September 8th, 2014[/u][/b]
+o Bug fix for v1.7 did not include globalized variable $user_info within function.
+
 [b][u]v1.7 - September 7th, 2014[/u][/b]
 o Modified Simple Portal language loading code so that it is loaded for mods and global mods.  Thanks, [url=http://www.simplemachines.org/community/index.php?action=profile;u=322341]NekoJonez[/url]!
 
