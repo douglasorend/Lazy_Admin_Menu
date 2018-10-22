@@ -14,56 +14,84 @@ if (!defined('SMF'))
 **********************************************************************************/
 function LazyAdmin_Menu_Buttons(&$areas)
 {
-	global $sourcedir, $scripturl, $context, $user_info;
+	global $sourcedir, $scripturl, $context, $user_info, $modSettings;
 	
 	// Can we do ANYTHING in the admin area?  If not, skip this:
-	if (!$context['allow_admin'])
+	if (!$context['user']['is_admin'] || isset($context['admin_preferences']))
 		return;
-	
+	$admin = &$areas['admin'];
+	$saved = $admin['sub_buttons']['errorlog']['title'];
+
 	// Retrieve the admin area menu, either from cache or the Admin.php script...
-	if (($admin_areas = cache_get_data('admin_area_menu_' . $user_info['id'], 120)) == null)
+	if (($temp = cache_get_data('admin_menu_' . $user_info['id'], 86400)) == null)
 	{
 		require_once($sourcedir . '/Admin.php');
 		$admin_areas = AdminMain(true);
-	}
 
-	// Rebuild the admin menu:
-	$admin = &$areas['admin'];
-	unset($admin['sub_buttons']);
-	foreach ($admin_areas as $alpha1 => $beta1)
-	{
-		// Build first level menu:
-		$admin['sub_buttons'][$alpha1] = array(
-			'title' => $beta1['title'],
-			'show' => $context['allow_admin'],
-			'sub_buttons' => array(),
-		);
-		if (!empty($beta1['permission']))
-			$admin['sub_buttons'][$alpha1]['show'] = allowedTo($beta1['permission']);
-			
-		// Build second level menus:
-		$first = true;
-		$last = false;
-		foreach ($beta1['areas'] as $alpha2 => $beta2)
+		// Rebuild the admin menu:
+		unset($admin['sub_buttons']);
+		foreach ($admin_areas as $id1 => $area1)
 		{
-			if ($alpha2 == 'search' || !empty($beta2['hidden']))
-				continue;
-			if ($first)
+			// Build first level menu:
+			$admin['sub_buttons'][$id1] = array(
+				'title' => $area1['title'],
+				'show' => $context['allow_admin'],
+				'sub_buttons' => array(),
+			);
+			if (!empty($area1['permission']))
+				$admin['sub_buttons'][$id1]['show'] = allowedTo($area1['permission']);
+				
+			// Build second level menus:
+			$first = true;
+			if (isset($area1['custom_url']) && !empty($area1['custom_url']))
 			{
-				$admin['sub_buttons'][$alpha1]['href'] = $scripturl . '?action=admin;area=' . $alpha2;
+				$admin['sub_buttons'][$id1]['href'] = $area1['custom_url'];
 				$first = false;
 			}
-			$admin['sub_buttons'][$alpha1]['sub_buttons'][$alpha2] = array(
-				'title' => $beta2['label'],
-				'href' => $scripturl . '?action=admin;area=' . $alpha2,
-				'show' => $context['allow_admin']
-			);
-			if (!empty($beta2['permission']))
-				$admin['sub_buttons'][$alpha1]['show'] = allowedTo($beta2['permission']);
-			$last = $alpha2;
+			$last = false;
+			foreach ($area1['areas'] as $id2 => $area2)
+			{
+				if ($id2 == 'search' || !empty($area2['hidden']) || (isset($area2['enabled']) && !$area2['enabled']))
+					continue;
+				if ($first)
+				{
+					$admin['sub_buttons'][$id1]['href'] = $scripturl . '?action=admin;area=' . $id2;
+					$first = false;
+				}
+				$admin['sub_buttons'][$id1]['sub_buttons'][$id2] = array(
+					'title' => $area2['label'],
+					'href' => $scripturl . '?action=admin;area=' . $id2,
+					'show' => $context['allow_admin'],
+				);
+				if (!empty($area2['permission']))
+					$admin['sub_buttons'][$id1]['show'] = allowedTo($area2['permission']);
+				$last = $id2;
+			}
+			$admin['sub_buttons'][$id1]['sub_buttons'][$id2]['is_last'] = true;
 		}
-		$admin['sub_buttons'][$alpha1]['sub_buttons'][$alpha2]['is_last'] = true;
+
+		// Cache the admin menu array for future use:
+		if (!empty($modSettings['cache_enable']))
+			cache_put_data('admin_menu_' . $user_info['id'], $areas['admin'], 86400);
 	}
+	else
+		$admin = $temp;
+
+	// Patch up the admin menu so everything works right:
+	foreach ($areas['admin']['sub_buttons'] as $id1 => $area1)
+	{
+		if (isset($areas['admin']['sub_buttons'][$id1]['href']))
+			$areas['admin']['sub_buttons'][$id1]['href'] .= ';' . $context['session_var'] . '=' . $context['session_id'];
+		foreach ($areas['admin']['sub_buttons'][$id1]['sub_buttons'] as $id2 => $area2)
+		{
+			if (isset($areas['admin']['sub_buttons'][$id1]['sub_buttons'][$id2]['href']))
+				$areas['admin']['sub_buttons'][$id1]['sub_buttons'][$id2]['href'] .= ';' . $context['session_var'] . '=' . $context['session_id'];
+		}
+	}
+
+	// Replace the "logs" text with the "error logs" text from the original menu:
+	if (isset($admin['sub_buttons']['maintenance']['sub_buttons']['logs']))
+		$admin['sub_buttons']['maintenance']['sub_buttons']['logs']['title'] = $saved;
 }
 
 ?>

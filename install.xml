@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
-<name>Buddy Links Everywhere</name>
-<id>Dougiefresh:BuddyLinks</id>
-<version>1.0</version>
+<name>Lazy Admin Menu</name>
+<id>Dougiefresh:Lazy_Admin</id>
+<version>1.2</version>
 
 <file name="$sourcedir/Admin.php">
 	<operation>
@@ -18,7 +18,7 @@
 		<search position="after"><![CDATA[// Make sure the administrator has a valid session...]]></search>
 		<add><![CDATA[// Cache the admin menu array for future use:
 	if (!empty($modSettings['cache_enable']))
-		cache_put_data('admin_area_menu_' . $user_info['id'], $admin_areas);
+		cache_put_data('admin_area_menu_' . $user_info['id'], null, 86400);
 
 	// If we are only requesting the admin menu, return to caller:
 	if ($menu_only)
@@ -28,11 +28,6 @@
 	</operation>
 	<operation>	
 		<search position="after"><![CDATA[loadTemplate('Admin', 'admin');]]></search>
-		<add><![CDATA[if (!$menu_only)
-		]]></add>
-	</operation>
-	<operation>
-		<search position="after"><![CDATA[require_once($sourcedir . '/Subs-Menu.php');]]></search>
 		<add><![CDATA[if (!$menu_only)
 		]]></add>
 	</operation>
