@@ -1,3 +1,7 @@
+v2.5 - October 22nd, 2018
+o No functionality change.
+o Updated documentation to point to new website.
+
 v2.4 - February 26th, 2018
 o Now uses [b]safe_serialize[/b]/[b]safe_unserialize[/b] functions when available.
 

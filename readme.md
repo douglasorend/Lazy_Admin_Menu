@@ -1,33 +1,37 @@
-[hr]
-[center][color=red][size=16pt][b]LAZY ADMIN MENU v2.5[/b][/size][/color]
-[url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=http://custom.simplemachines.org/mods/index.php?mod=3901]Link to Mod[/url]
-[/center]
-[hr]
+-------
 
-[color=blue][b][size=12pt][u]Introduction[/u][/size][/b][/color]
+# LAZY ADMIN MENU v2.5
+
+[**By Dougiefresh**](http://www.simplemachines.org/community/index.php?action=profile;u=253913) -> [Link to Mod](http://custom.simplemachines.org/mods/index.php?mod=3901)
+
+-------
+
+## Introduction
 This mod alters the main menu's Moderate menu to bring all the functionality of the moderation area to the main forum's menu bar.
 
-This mod was inspired by tip provided by [url=http://www.simplemachines.org/community/index.php?action=profile;u=152526]snow[/url] in [url=http://www.simplemachines.org/community/index.php?topic=400767.msg2785613#msg2785613]Lazy Admin Menu[/url] in order to make it easier for the admin to navigate straight to where they want to go.
+This mod was inspired by tip provided by [snow](http://www.simplemachines.org/community/index.php?action=profile;u=152526) in [Lazy Admin Menu](http://www.simplemachines.org/community/index.php?topic=400767.msg2785613#msg2785613) in order to make it easier for the admin to navigate straight to where they want to go.
 
 The only difference is that this mod built dynamically, so that any changes to the moderation menu are shown immediately.
 
-[color=blue][b][size=12pt][u]Security Issue Notice[/u][/size][/b][/color]
-If you are running [b]VERSION 2.0[/b], you are [b]STRONGLY URGED[/b] to stop using the mod immediately and upgrade to the latest version, which addresses a [b]MAJOR SECURITY ISSUE[/b] that has been resolved.  All version 1.x and version 2.1+ mods are not affected by this security issue!
+## Security Issue Notice
+If you are running **VERSION 2.0**, you are **STRONGLY URGED** to stop using the mod immediately and upgrade to the latest version, which addresses a **MAJOR SECURITY ISSUE** that has been resolved.  All version 1.x and version 2.1+ mods are not affected by this security issue!
 
-[color=blue][b][size=12pt][u]Admin Settings[/u][/size][/b][/color]
+## Admin Settings
 There are no admin settings to this mod.  To disable, you must uninstall this mod.
 
-[color=blue][b][size=12pt][u]Related Discussions[/u][/size][/b][/color]
-o [url=http://www.simplemachines.org/community/index.php?topic=400767][TIP] Lazy Admin Menu[/url]
+## Related Discussions
 
-[color=blue][b][size=12pt][u]Compatibility Notes[/u][/size][/b][/color]
+- [[TIP] Lazy Admin Menu](http://www.simplemachines.org/community/index.php?topic=400767)
+
+## Compatibility Notes
 This mod was tested on SMF 2.0.12, but should work on SMF 2.1 Beta 2, as well as SMF 2.0 and up.  SMF 1.x is not and will not be supported.
 
-[color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
-The changelog can be viewed at [url=http://www.xptsp.com/board/free-modifications/lazy-admin-menu/?tab=1]XPtsp.com[/url].
+## Changelog
+The changelog can be viewed at [XPtsp.com](http://www.xptsp.com/board/free-modifications/lazy-admin-menu/?tab=1).
 
-[color=blue][b][size=12pt][u]License[/u][/size][/b][/color]
+## License
 Copyright (c) 2015 - 2018, Douglas Orend
+
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
