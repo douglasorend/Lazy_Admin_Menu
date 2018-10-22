@@ -1,5 +1,5 @@
 [hr]
-[center][color=red][size=16pt][b]LAZY ADMIN MENU v1.12[/b][/size][/color]
+[center][color=red][size=16pt][b]LAZY ADMIN MENU v1.13[/b][/size][/color]
 [url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=http://custom.simplemachines.org/mods/index.php?mod=3901]Link to Mod[/url]
 [/center]
 [hr]
@@ -22,6 +22,9 @@ This mod was tested on [b]SMF 2.0.8[/b], but should work on SMF 2.0 and up.  SMF
 
 [color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
 [quote]
+[b][u]v1.13 - January 6th, 2014[/u][/b]
+o Added code to deal with already loaded strings in a lot of unrelated mods....
+
 [b][u]v1.12 - November 12th, 2014[/u][/b]
 o Removed SimplePortal changes in favor of loading language files via [b]Subs-LazyAdmin.php[/b]...
 o Added support for [url=http://custom.simplemachines.org/mods/index.php?mod=2441]Error Log Counter[/url] mod so that number of errors show up in the top menu.

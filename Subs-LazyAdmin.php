@@ -27,9 +27,11 @@ function LazyAdmin_Menu_Buttons(&$areas)
 	{
 		require_once($sourcedir . '/Admin.php');
 		$old_txt = $txt;
+		$already_loaded = loadLanguage('', '', false, false, true);
 		if (function_exists("sp_languageSelect"))
 			loadLanguage('SPortalAdmin', sp_languageSelect('SPortalAdmin'));
 		$admin_areas = AdminMain(true);
+		loadLanguage('', '', false, false, $already_loaded);
 		$txt = $old_txt;
 		unset($old_txt);
 
