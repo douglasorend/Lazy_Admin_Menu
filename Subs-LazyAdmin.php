@@ -23,7 +23,7 @@ function LazyAdmin_Menu_Buttons(&$areas)
 	$saved = $admin['sub_buttons']['errorlog']['title'];
 
 	// Retrieve the admin area menu, either from cache or the Admin.php script...
-	if (($temp = cache_get_data('admin_menu_' . $user_info['id'], 86400)) == null)
+	if (($temp = cache_get_data('admin_menu19_' . $user_info['id'], 86400)) == null)
 	{
 		require_once($sourcedir . '/Admin.php');
 		$admin_areas = AdminMain(true);
@@ -72,7 +72,7 @@ function LazyAdmin_Menu_Buttons(&$areas)
 
 		// Cache the admin menu array for future use:
 		if (!empty($modSettings['cache_enable']))
-			cache_put_data('admin_menu_' . $user_info['id'], $admin['sub_buttons'], 86400);
+			cache_put_data('admin_menu19_' . $user_info['id'], $admin['sub_buttons'], 86400);
 	}
 	else
 		$admin['sub_buttons'] = $temp;

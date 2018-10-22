@@ -1,5 +1,5 @@
 [hr]
-[center][color=red][size=16pt][b]LAZY ADMIN MENU v1.8[/b][/size][/color]
+[center][color=red][size=16pt][b]LAZY ADMIN MENU v1.10[/b][/size][/color]
 [url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=http://custom.simplemachines.org/mods/index.php?mod=3901]Link to Mod[/url]
 [/center]
 [hr]
@@ -22,6 +22,10 @@ The admin menu on the menu will not be replaced while you are in the Admin area.
 
 [color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
 [quote]
+[b][u]v1.10 - October 5th, 2014[/u][/b]
+o Modified SimplePortal so that the language file will hopefully be loaded if the user can adminstrate anything...
+o Moved Lazy Admin Menu hook to [b]Subs.php[/b] to make sure additions made after it show up.
+
 [b][u]v1.9 - October 4th, 2014[/u][/b]
 o Changed caching code from caching entire admin menu to only the sub_buttons of the admin menu.
 

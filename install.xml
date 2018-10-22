@@ -3,7 +3,7 @@
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <name>Lazy Admin Menu</name>
 <id>Dougiefresh:Lazy_Admin</id>
-<version>1.7</version>
+<version>1.10</version>
 
 <file name="$sourcedir/Admin.php">
 	<operation>
@@ -18,11 +18,7 @@
 		<search position="after"><![CDATA[// Make sure the administrator has a valid session...]]></search>
 		<add><![CDATA[// Cache the admin menu array for future use:
 	if ($menu_only)
-	{
-		if (!empty($modSettings['cache_enable']))
-			cache_put_data('admin_menu_' . $user_info['id'], null, 86400);
 		return $admin_areas;
-	}
 		
 	]]></add>
 	</operation>
@@ -37,14 +33,20 @@
 		]]></add>
 	</operation>
 </file>
+<file name="$sourcedir/Subs.php">
+	<operation>
+		<search position="replace"><![CDATA[call_integration_hook('integrate_menu_buttons', array(&$buttons));]]></search>
+		<add><![CDATA[call_integration_hook('integrate_menu_buttons', array(&$buttons));
+
+		// BEGIN MOD Real Tabs for Admin/Moderator
+		require_once($sourcedir . '/Subs-LazyAdmin.php');
+		LazyAdmin_Menu_Buttons($buttons);]]></add>
+	</operation>
+</file>
 <file name="$sourcedir/Subs-Portal.php" error="skip">
 	<operation>
-		<search position="replace"><![CDATA[global $context, $sourcedir, $scripturl, $modSettings, $txt]]></search>
-		<add><![CDATA[global $context, $sourcedir, $scripturl, $modSettings, $txt, $user_info]]></add>
-	</operation>
-	<operation>
 		<search position="replace"><![CDATA[if (!empty($_REQUEST['action']) && in_array($_REQUEST['action'], array('admin', 'helpadmin')))]]></search>
-		<add><![CDATA[if ((!empty($_REQUEST['action']) && in_array($_REQUEST['action'], array('admin', 'helpadmin', 'moderate'))) || $context['user']['is_admin'] || in_array(3, $user_info['groups']) || in_array(2, $user_info['groups']))]]></add>
+		<add><![CDATA[if ((!empty($_REQUEST['action']) && in_array($_REQUEST['action'], array('admin', 'helpadmin', 'moderate'))) || !empty($context['allow_admin']))]]></add>
 	</operation>
 </file>
 </modification>
