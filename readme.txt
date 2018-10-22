@@ -1,5 +1,5 @@
 [hr]
-[center][color=red][size=16pt][b]LAZY ADMIN MENU v1.0[/b][/size][/color]
+[center][color=red][size=16pt][b]LAZY ADMIN MENU v1.1[/b][/size][/color]
 [url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=http://custom.simplemachines.org/mods/index.php?mod=3901]Link to Mod[/url]
 [/center]
 [hr]
@@ -19,6 +19,10 @@ o [url=http://www.simplemachines.org/community/index.php?topic=400767][TIP] Lazy
 This mod was tested on [b]SMF 2.0.8[/b], but should work on SMF 2.0 and up.  SMF 1.1 is not and will not be supported, so please don't ask.
 
 [color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
+[b][u]v1.1 - July 21th, 2013[/u][/b]
+o Reduced the potential need to load so many files by caching the admin area menu.
+o [b]Subs-LazyAdmin.php[/b] uses the cached version of admin area menu when possible.
+
 [b][u]v1.0 - July 20th, 2013[/u][/b]
 o Initial Release of the mod
 

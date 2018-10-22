@@ -7,16 +7,34 @@
 
 <file name="$sourcedir/Admin.php">
 	<operation>
-		<search position="replace"><![CDATA[function AdminMain()]]></search>
-		<add><![CDATA[function AdminMain($menu_only = false)]]></add>
+		<search position="replace"><![CDATA[function AdminMain()
+{
+	global $txt, $context, $scripturl, $sc, $modSettings, $user_info, $settings, $sourcedir, $options, $smcFunc, $boarddir;]]></search>
+		<add><![CDATA[function AdminMain($menu_only = false)
+{
+	global $txt, $context, $scripturl, $sc, $modSettings, $user_info, $settings, $sourcedir, $options, $smcFunc, $boarddir, $language;]]></add>
 	</operation>
 	<operation>
 		<search position="after"><![CDATA[// Make sure the administrator has a valid session...]]></search>
-		<add><![CDATA[// If we are only requesting the admin menu, return to caller:
+		<add><![CDATA[// Cache the admin menu array for future use:
+	if (!empty($modSettings['cache_enable']))
+		cache_put_data('admin_area_menu_' . $user_info['id'], $admin_areas);
+
+	// If we are only requesting the admin menu, return to caller:
 	if ($menu_only)
 		return $admin_areas;
 		
 	]]></add>
+	</operation>
+	<operation>	
+		<search position="after"><![CDATA[loadTemplate('Admin', 'admin');]]></search>
+		<add><![CDATA[if (!$menu_only)
+		]]></add>
+	</operation>
+	<operation>
+		<search position="after"><![CDATA[require_once($sourcedir . '/Subs-Menu.php');]]></search>
+		<add><![CDATA[if (!$menu_only)
+		]]></add>
 	</operation>
 </file>
 </modification>

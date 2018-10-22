@@ -14,15 +14,18 @@ if (!defined('SMF'))
 **********************************************************************************/
 function LazyAdmin_Menu_Buttons(&$areas)
 {
-	global $sourcedir, $scripturl, $context;
+	global $sourcedir, $scripturl, $context, $user_info;
 	
 	// Can we do ANYTHING in the admin area?  If not, skip this:
 	if (!$context['allow_admin'])
 		return;
 	
-	// Retrieve the admin area menu:
-	require_once($sourcedir . '/Admin.php');
-	$admin_areas = AdminMain(true);
+	// Retrieve the admin area menu, either from cache or the Admin.php script...
+	if (($admin_areas = cache_get_data('admin_area_menu_' . $user_info['id'], 120)) == null)
+	{
+		require_once($sourcedir . '/Admin.php');
+		$admin_areas = AdminMain(true);
+	}
 
 	// Rebuild the admin menu:
 	$admin = &$areas['admin'];
