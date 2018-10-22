@@ -8,11 +8,12 @@
 
 	<install for="2.0 - 2.0.99">
 		<readme type="file" parsebbc="true">readme.txt</readme>
-		<code>remove_hooks.php</code>
+		<code>add_remove_hooks.php</code>
 		<modification>install.xml</modification>
 		<require-file name="Subs-LazyAdmin.php" destination="$sourcedir" />
 	</install>
 	<uninstall for="2.0 - 2.0.99">
+		<code>add_remove_hooks.php</code>
 		<modification reverse="true">install.xml</modification>
 		<remove-file name="$sourcedir/Subs-LazyAdmin.php" />
 	</uninstall>
