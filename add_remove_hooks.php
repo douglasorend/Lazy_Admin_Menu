@@ -22,6 +22,8 @@ if (SMF == 'SSI')
 $hook_functions = array(
 	'integrate_pre_include' => '$sourcedir/Subs-LazyAdmin.php',
 	'integrate_load_theme' => 'LazyAdmin_Load_Theme',
+	'integrate_core_features' => 'LazyAdmin_CoreFeatures',
+	'integrate_verify_user' => 'LazyAdmin_Verify_User',
 );
 
 // Adding or removing them?

@@ -1,3 +1,6 @@
+v2.1 - November 7th, 2016
+o Fixed bug report that damaged proper user verification functionality.
+
 v2.0 - November 2nd, 2016
 o Rewritten to use only hooks in order to gather the required information.
 

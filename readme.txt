@@ -1,13 +1,18 @@
 [hr]
-[center][color=red][size=16pt][b]LAZY ADMIN MENU v2.0[/b][/size][/color]
+[center][color=red][size=16pt][b]LAZY ADMIN MENU v2.1[/b][/size][/color]
 [url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=http://custom.simplemachines.org/mods/index.php?mod=3901]Link to Mod[/url]
 [/center]
 [hr]
 
 [color=blue][b][size=12pt][u]Introduction[/u][/size][/b][/color]
+This mod alters the main menu's Moderate menu to bring all the functionality of the moderation area to the main forum's menu bar.
+
 This mod was inspired by tip provided by [url=http://www.simplemachines.org/community/index.php?action=profile;u=152526]snow[/url] in [url=http://www.simplemachines.org/community/index.php?topic=400767.msg2785613#msg2785613]Lazy Admin Menu[/url] in order to make it easier for the admin to navigate straight to where they want to go.
 
-The only difference is that this mod built dynamically, so that any changes to the admin menu are shown immediately.
+The only difference is that this mod built dynamically, so that any changes to the moderation menu are shown immediately.
+
+[color=blue][b][size=12pt][u]Security Issue Notice[/u][/size][/b][/color]
+If you are running [b]VERSION 2.0[/b], you are [b]STRONGLY URGED[/b] to stop using the mod immediately and upgrade to the latest version, which addresses a [b]MAJOR SECURITY ISSUE[/b] that has been resolved.  All version 1.x and version 2.1+ mods are not affected by this security issue!
 
 [color=blue][b][size=12pt][u]Admin Settings[/u][/size][/b][/color]
 There are no admin settings to this mod.  To disable, you must uninstall this mod.
