@@ -26,7 +26,12 @@ function LazyAdmin_Menu_Buttons(&$areas)
 	if (($admin['sub_buttons'] = cache_get_data('admin_menu19_' . $user_info['id'], 86400)) == null)
 	{
 		require_once($sourcedir . '/Admin.php');
+		$old_txt = $txt;
+		if (function_exists("sp_languageSelect"))
+			loadLanguage('SPortalAdmin', sp_languageSelect('SPortalAdmin'));
 		$admin_areas = AdminMain(true);
+		$txt = $old_txt;
+		unset($old_txt);
 
 		// Rebuild the admin menu:
 		unset($admin['sub_buttons']);
@@ -90,6 +95,10 @@ function LazyAdmin_Menu_Buttons(&$areas)
 	// Replace the "logs" text with the "error logs" text from the original menu:
 	if (isset($admin['sub_buttons']['maintenance']['sub_buttons']['logs']))
 		$admin['sub_buttons']['maintenance']['sub_buttons']['logs']['title'] = $saved;
+		
+	// If the error log count mod is installed, add it to the Admin top menu:
+	if (function_exists("get_error_log_count_for_menu"))
+		$admin['title'] .= get_error_log_count_for_menu();
 }
 
 ?>
