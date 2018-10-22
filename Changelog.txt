@@ -1,3 +1,8 @@
+v2.2 - November 12th, 2016
+o Fixed issue where menu wasn't changed because no caching of menu could be done.
+o Added code to stop bans from Forum Hard Hit mod while using this mod.
+o Fixed SMF update bug that prevents unserializing strings longer than 4096 bytes.
+
 v2.1 - November 7th, 2016
 o Fixed bug report that damaged proper user verification functionality.
 

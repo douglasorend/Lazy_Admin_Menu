@@ -4,11 +4,11 @@
 *********************************************************************************
 * This program is distributed in the hope that it is and will be useful, but
 * WITHOUT ANY WARRANTIES; without even any implied warranty of MERCHANTABILITY
-* or FITNESS FOR A PARTICULAR PURPOSE, 
+* or FITNESS FOR A PARTICULAR PURPOSE,
 **********************************************************************************/
-if (!defined('SMF')) 
+if (!defined('SMF'))
 	die('Hacking attempt...');
-	
+
 /**********************************************************************************
 * Lazy Admin Menu hook
 **********************************************************************************/
@@ -26,7 +26,7 @@ function LazyAdmin_Load_Theme()
 	add_integration_function('integrate_menu_buttons', 'LazyAdmin_Menu_Buttons', false);
 }
 
-function LazyAdmin_Admin_Hook(&$admin_areas)
+function LazyAdmin_Admin_Hook(&$areas)
 {
 	global $scripturl, $user_info, $context;
 
@@ -34,9 +34,13 @@ function LazyAdmin_Admin_Hook(&$admin_areas)
 	if (empty($user_info['id']) || !isset($_GET['area']) || $_GET['area'] != 'lazyadmin_acp' || empty($_GET['u']))
 		return;
 
+	// Keep from triggering the Forum Hard Hit mod:
+	if (!empty($context['HHP_time']))
+		unset($_SESSION['HHP_Visits'][$context['HHP_time']]);
+			
 	// Rebuild the admin menu:
 	$cached = array();
-	foreach ($admin_areas as $id1 => $area1)
+	foreach ($areas as $id1 => $area1)
 	{
 		// Build first level menu:
 		$cached[$id1] = array(
@@ -48,7 +52,7 @@ function LazyAdmin_Admin_Hook(&$admin_areas)
 		$first = $last = false;
 		if (!empty($area1['custom_url']))
 			$first = $cached[$id1]['href'] = $area1['custom_url'];
-			
+
 		// Build second level menus:
 		foreach ($area1['areas'] as $id2 => $area2)
 		{
@@ -71,14 +75,14 @@ function LazyAdmin_Admin_Hook(&$admin_areas)
 	}
 
 	// Cache the admin menu array for future use:
-	cache_put_data('lazyadmin_' . $user_info['id'], $cached, 86400);
+	echo serialize($cached);
 	exit;
 }
 
 function LazyAdmin_Menu_Buttons(&$areas)
 {
 	global $scripturl, $user_info, $context;
-	
+
 	// Gotta prevent an infinite loop here:
 	if (isset($_GET['action']) && $_GET['action'] == 'admin' && isset($_GET['area']) && $_GET['area'] == 'lazyadmin_acp')
 		return;
@@ -88,38 +92,42 @@ function LazyAdmin_Menu_Buttons(&$areas)
 		return;
 
 	// Retrieve the admin area menu, either from cache or the Admin.php script...
-	$admin = &$areas['admin'];
-	$saved = $admin['sub_buttons']['errorlog']['title'];
+	$saved = $areas['admin']['sub_buttons']['errorlog']['title'];
 	if (($cached = cache_get_data('lazyadmin_' . $user_info['id'], 86400)) == null)
 	{
-		@file_get_contents($scripturl . '?action=admin;area=lazyadmin_acp;u=' . $user_info['id']);
-		$cached = cache_get_data('lazyadmin_' . $user_info['id'], 86400);
-	}
-	if (!is_array($cached))
-		return;
-
-	// Replace the admin menu with the cached Admin menu:
-	$admin['sub_buttons'] = $cached;		
-
-	// Patch up the admin menu so everything works right:
-	foreach ($cached as $id1 => $area1)
-	{
-		if (isset($cached[$id1]['href']))
-			$cached[$id1]['href'] .= ';' . $context['session_var'] . '=' . $context['session_id'];
-		foreach ($cached[$id1]['sub_buttons'] as $id2 => $area2)
+		$contents = @file_get_contents($scripturl . '?action=admin;area=lazyadmin_acp;u=' . $user_info['id']);
+		if (substr($contents, 0, 2) == 'a:')
 		{
-			if (isset($cached[$id1]['sub_buttons'][$id2]['href']))
-				$cached[$id1]['sub_buttons'][$id2]['href'] .= ';' . $context['session_var'] . '=' . $context['session_id'];
+			$cached = @unserialize($contents);
+			cache_put_data('lazyadmin_' . $user_info['id'], $cached, 86400);
 		}
 	}
 
+	// Patch up the admin menu so everything works right:
+	if (is_array($cached))
+	{
+		foreach ($cached as $id1 => $area1)
+		{
+			if (isset($cached[$id1]['href']))
+				$cached[$id1]['href'] .= ';' . $context['session_var'] . '=' . $context['session_id'];
+			foreach ($cached[$id1]['sub_buttons'] as $id2 => $area2)
+			{
+				if (isset($cached[$id1]['sub_buttons'][$id2]['href']))
+					$cached[$id1]['sub_buttons'][$id2]['href'] .= ';' . $context['session_var'] . '=' . $context['session_id'];
+			}
+		}
+
+		// Replace the admin menu with the cached Admin menu:
+		$areas['admin']['sub_buttons'] = $cached;
+	}
+
 	// Replace the "logs" text with the "error logs" text from the original menu:
-	if (isset($admin['sub_buttons']['maintenance']['sub_buttons']['logs']))
-		$admin['sub_buttons']['maintenance']['sub_buttons']['logs']['title'] = $saved;
-		
+	if (isset($areas['admin']['sub_buttons']['maintenance']['sub_buttons']['logs']))
+		$areas['admin']['sub_buttons']['maintenance']['sub_buttons']['logs']['title'] = $saved;
+
 	// If the error log count mod is installed, add it to the Admin top menu:
 	if (function_exists("get_error_log_count_for_menu"))
-		$admin['title'] .= get_error_log_count_for_menu();
+		$areas['admin']['title'] .= get_error_log_count_for_menu();
 }
 
 function LazyAdmin_CoreFeatures(&$core_features)
