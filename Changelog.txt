@@ -1,0 +1,65 @@
+v1.16 - April 4th, 2015
+o Updated for SMF 2.1 Beta 1
+
+v1.15 - February 7th, 2015
+o Fixed installer so that Package Manager will run the script necessary to add the hooks to the forum.
+
+v1.14 - January 16th, 2015
+o License change to Simplified BSD.  No functionality change.
+
+v1.13 - January 6th, 2014
+o Added code to deal with already loaded strings in a lot of unrelated mods....
+
+v1.12 - November 12th, 2014
+o Removed SimplePortal changes in favor of loading language files via Subs-LazyAdmin.php...
+o Added support for Error Log Counter mod so that number of errors show up in the top menu.
+o Added code to preserve language strings in the event there is a conflict between two strings....
+
+v1.11 - October 6th, 2014
+o Added some code to Subs.php to prevent screwing up forum during uninstallation of mod.
+o Upgrade possible from v1.10 to v1.11 since uninstalling mod screws up the forum.
+o Added code for 2-second cache to the admin area to prevent double code execution...
+
+v1.10 - October 5th, 2014
+o Modified SimplePortal so that the language file will hopefully be loaded if the user can adminstrate anything...
+o Moved Lazy Admin Menu hook to Subs.php to make sure additions made after it show up.
+
+v1.9 - October 4th, 2014
+o Changed caching code from caching entire admin menu to only the sub_buttons of the admin menu.
+
+v1.8 - September 8th, 2014
+o Bug fix for v1.7 did not include globalized variable $user_info within function.
+
+v1.7 - September 7th, 2014
+o Modified Simple Portal language loading code so that it is loaded for mods and global mods.  Thanks, NekoJonez!
+
+v1.6 - August 21th, 2014
+o Reverted some code back to v1.1 that detects whether Admin menu should be modified.
+
+v1.5 - August 17th, 2014
+o Forced loading of Simple Portal language file if logged in user is an admin
+
+v1.4 - August 2nd, 2014
+o Corrected some bad caching code in Admin.php....
+o Reverted some code back to allow admin top menu to be rebuilt while in the Admin area
+
+v1.3 - August 1st, 2014
+o Edited Simple Portal subs file to force loading of the language file....
+
+v1.2 - August 1st, 2014
+o Custom URLs in admin menu are now represented in the top menu...
+o Admin top menu will not be rebuilt while you are in the Admin area.
+o Moved caching code to Subs-LazyAdmin.php to speed up admin menu replacement...
+o Modified code to preserve error log text from original menu...
+o Session ID information attached to the end of each link so all links work properly
+o Fixed issue where a certain feature wasn't enabled, but was shown anyways...
+o Extended caching time on admin area menu from 2 minutes to 1 day...
+o Fixed undeclared variable issue when using SSI.php...
+o Removed one operation that caused multiple errors with Simple Portal....
+
+v1.1 - July 21th, 2014
+o Reduced the potential need to load so many files by caching the admin area menu.
+o Subs-LazyAdmin.php uses the cached version of admin area menu when possible.
+
+v1.0 - July 20th, 2014
+o Initial Release of the mod

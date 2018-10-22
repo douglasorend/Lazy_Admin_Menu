@@ -1,5 +1,5 @@
 [hr]
-[center][color=red][size=16pt][b]LAZY ADMIN MENU v1.15[/b][/size][/color]
+[center][color=red][size=16pt][b]LAZY ADMIN MENU v1.16[/b][/size][/color]
 [url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=http://custom.simplemachines.org/mods/index.php?mod=3901]Link to Mod[/url]
 [/center]
 [hr]
@@ -16,7 +16,7 @@ There are no admin settings to this mod.  To disable, you must uninstall this mo
 o [url=http://www.simplemachines.org/community/index.php?topic=400767][TIP] Lazy Admin Menu[/url]
 
 [color=blue][b][size=12pt][u]Compatibility Notes[/u][/size][/b][/color]
-This mod was tested on [b]SMF 2.0.8[/b], but should work on SMF 2.0 and up.  SMF 1.1 is not and will not be supported, so please don't ask.
+This mod was tested on SMF 2.0.9, but should work on SMF 2.1 Beta 1, as well as SMF 2.0 and up.  SMF 1.x is not and will not be supported.
 
 [url=http://custom.simplemachines.org/mods/index.php?mod=2441]Error Log Counter[/url] mod can be installed at any time.
 

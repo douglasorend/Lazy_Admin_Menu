@@ -3,16 +3,18 @@
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <name>Lazy Admin Menu</name>
 <id>Dougiefresh:Lazy_Admin</id>
-<version>1.15</version>
+<version>1.16</version>
 
 <file name="$sourcedir/Admin.php">
 	<operation>
 		<search position="replace"><![CDATA[function AdminMain()
 {
-	global $txt, $context, $scripturl, $sc, $modSettings, $user_info, $settings, $sourcedir, $options, $smcFunc, $boarddir]]></search>
+	global $txt, $context, $scripturl, $modSettings, $settings;
+	global $sourcedir, $options, $boarddir, $db_show_debug]]></search>
 		<add><![CDATA[function AdminMain($menu_only = false)
 {
-	global $txt, $context, $scripturl, $sc, $modSettings, $user_info, $settings, $sourcedir, $options, $smcFunc, $boarddir, $language]]></add>
+	global $txt, $context, $scripturl, $modSettings, $settings;
+	global $sourcedir, $options, $boarddir, $db_show_debug, $language, $user_info]]></add>
 	</operation>
 	<operation>
 		<search position="replace"><![CDATA[// Define all the menu structure - see Subs-Menu.php for details!]]></search>
