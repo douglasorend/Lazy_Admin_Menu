@@ -3,7 +3,7 @@
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <name>Lazy Admin Menu</name>
 <id>Dougiefresh:Lazy_Admin</id>
-<version>1.3</version>
+<version>1.4</version>
 
 <file name="$sourcedir/Admin.php">
 	<operation>
@@ -17,12 +17,12 @@
 	<operation>
 		<search position="after"><![CDATA[// Make sure the administrator has a valid session...]]></search>
 		<add><![CDATA[// Cache the admin menu array for future use:
-	if (!empty($modSettings['cache_enable']))
-		cache_put_data('admin_area_menu_' . $user_info['id'], $admin_areas);
-
-	// If we are only requesting the admin menu, return to caller:
 	if ($menu_only)
+	{
+		if (!empty($modSettings['cache_enable']))
+			cache_put_data('admin_menu_' . $user_info['id'], null, 86400);
 		return $admin_areas;
+	}
 		
 	]]></add>
 	</operation>

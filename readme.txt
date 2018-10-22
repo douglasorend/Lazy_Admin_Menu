@@ -22,7 +22,7 @@ The admin menu on the menu will not be replaced while you are in the Admin area.
 
 [color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
 [b][u]v1.4 - August 2nd, 2014[/u][/b]
-o 
+o Reverted some code back to allow admin top menu to be rebuilt while in the Admin area
 
 [b][u]v1.3 - August 1st, 2014[/u][/b]
 o Edited Simple Portal subs file to force loading of the language file....
