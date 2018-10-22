@@ -1,3 +1,6 @@
+v2.3 - December 31st, 2016
+o Modified SMF bug fix to make it compatible with upcoming SMF 2.0.13 patch.
+
 v2.2 - November 12th, 2016
 o Fixed issue where menu wasn't changed because no caching of menu could be done.
 o Added code to stop bans from Forum Hard Hit mod while using this mod.

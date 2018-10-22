@@ -88,7 +88,7 @@ function LazyAdmin_Menu_Buttons(&$areas)
 		return;
 
 	// Are you a guest?  Then why bother with it....
-	if (empty($user_info['id']))
+	if (empty($user_info['id']) || empty($areas['admin']['show']))
 		return;
 
 	// Retrieve the admin area menu, either from cache or the Admin.php script...
