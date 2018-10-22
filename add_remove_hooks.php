@@ -21,12 +21,18 @@ if (SMF == 'SSI')
 // Define the hooks
 $hook_functions = array(
 	'integrate_pre_include' => '$sourcedir/Subs-LazyAdmin.php',
-	'integrate_menu_buttons' => 'LazyAdmin_Menu_Buttons',
+	'integrate_load_theme' => 'LazyAdmin_Load_Theme',
 );
 
-// Remove the hooks:
+// Adding or removing them?
+if (!empty($context['uninstalling']))
+	$call = 'remove_integration_function';
+else
+	$call = 'add_integration_function';
+
+// Do the deed
 foreach ($hook_functions as $hook => $function)
-	remove_integration_function($hook, $function);
+	$call($hook, $function);
 
 if (SMF == 'SSI')
    echo 'Congratulations! You have successfully installed this mod!';

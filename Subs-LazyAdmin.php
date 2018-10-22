@@ -12,47 +12,65 @@ if (!defined('SMF'))
 /**********************************************************************************
 * Lazy Admin Menu hook
 **********************************************************************************/
+function LazyAdmin_Load_Theme()
+{
+	// This admin hook must be last hook executed!
+	if (isset($_GET['action'], $_GET['area']) && $_GET['action'] == 'admin' && $_GET['area'] == 'lazyadmin_acp')
+		add_integration_function('integrate_admin_areas', 'LazyAdmin_Admin_Hook', false);
+	else
+		add_integration_function('integrate_menu_buttons', 'LazyAdmin_Menu_Buttons', false);
+}
+
+function LazyAdmin_Admin_Hook(&$areas)
+{
+	echo var_export($areas);
+	exit;
+}
+
 function LazyAdmin_Menu_Buttons(&$areas)
 {
 	global $sourcedir, $scripturl, $context, $user_info, $modSettings, $txt;
 	
-	// Can we do ANYTHING in the admin area?  If not, skip this:
-	if (!$context['allow_admin'])
-		return;
+	// Retrieve the admin area menu, either from cache or the Admin.php script...
 	$admin = &$areas['admin'];
 	$saved = $admin['sub_buttons']['errorlog']['title'];
-
-	// Retrieve the admin area menu, either from cache or the Admin.php script...
-	if (($admin['sub_buttons'] = cache_get_data('admin_menu19_' . $user_info['id'], 86400)) == null)
+	if (($cached = cache_get_data('lazyadmin_' . $user_info['id'], 86400)) == null)
 	{
-		require_once($sourcedir . '/Admin.php');
-		$old_txt = $txt;
-		$already_loaded = loadLanguage('', '', false, false, true);
-		if (function_exists("sp_languageSelect"))
-			loadLanguage('SPortalAdmin', sp_languageSelect('SPortalAdmin'));
-		$admin_areas = AdminMain(true);
-		loadLanguage('', '', false, false, $already_loaded);
-		$txt = $old_txt;
-		unset($old_txt);
+		// Get the current admin menu.  Failure to do so means aborting the menu!
+		$contents = @file_get_contents($scripturl . '?action=admin;area=lazyadmin_acp;' . $context['session_var'] . '=' . $context['session_id']);
+		if (substr($contents, 0, 7) != 'array (')
+		{
+			if (!empty($modSettings['cache_enable']))
+				cache_put_data('lazyadmin_' . $user_info['id'], 1, 86400);			
+			return;
+		}
+		$convert_to_array = create_function('', 'return ' . $contents . ';');
+		$admin_areas = $convert_to_array();
+		if (!is_array($admin_areas))
+		{
+			if (!empty($modSettings['cache_enable']))
+				cache_put_data('lazyadmin_' . $user_info['id'], 1, 86400);			
+			return;
+		}
 
 		// Rebuild the admin menu:
-		unset($admin['sub_buttons']);
+		$cached = array();
 		foreach ($admin_areas as $id1 => $area1)
 		{
 			// Build first level menu:
-			$admin['sub_buttons'][$id1] = array(
+			$cached[$id1] = array(
 				'title' => $area1['title'],
 				'show' => $context['allow_admin'],
 				'sub_buttons' => array(),
 			);
 			if (!empty($area1['permission']))
-				$admin['sub_buttons'][$id1]['show'] = allowedTo($area1['permission']);
+				$cached[$id1]['show'] = allowedTo($area1['permission']);
 				
 			// Build second level menus:
 			$first = true;
 			if (isset($area1['custom_url']) && !empty($area1['custom_url']))
 			{
-				$admin['sub_buttons'][$id1]['href'] = $area1['custom_url'];
+				$cached[$id1]['href'] = $area1['custom_url'];
 				$first = false;
 			}
 			$last = false;
@@ -62,25 +80,28 @@ function LazyAdmin_Menu_Buttons(&$areas)
 					continue;
 				if ($first)
 				{
-					$admin['sub_buttons'][$id1]['href'] = $scripturl . '?action=admin;area=' . $id2;
+					$cached[$id1]['href'] = $scripturl . '?action=admin;area=' . $id2;
 					$first = false;
 				}
-				$admin['sub_buttons'][$id1]['sub_buttons'][$id2] = array(
+				$cached[$id1]['sub_buttons'][$id2] = array(
 					'title' => $area2['label'],
 					'href' => $scripturl . '?action=admin;area=' . $id2,
-					'show' => $context['allow_admin'],
+					'show' => false,
 				);
 				if (!empty($area2['permission']))
-					$admin['sub_buttons'][$id1]['show'] = allowedTo($area2['permission']);
+					$cached[$id1]['show'] = allowedTo($area2['permission']);
 				$last = $id2;
 			}
-			$admin['sub_buttons'][$id1]['sub_buttons'][$id2]['is_last'] = true;
+			$cached[$id1]['sub_buttons'][$id2]['is_last'] = true;
 		}
 
 		// Cache the admin menu array for future use:
 		if (!empty($modSettings['cache_enable']))
-			cache_put_data('admin_menu19_' . $user_info['id'], $admin['sub_buttons'], 86400);
+			cache_put_data('lazyadmin_' . $user_info['id'], $cached, 86400);
+		$admin['sub_buttons'] = $cached;
 	}
+	elseif (is_array($cached))
+		$admin['sub_buttons'] = $cached;		
 
 	// Patch up the admin menu so everything works right:
 	foreach ($admin['sub_buttons'] as $id1 => $area1)

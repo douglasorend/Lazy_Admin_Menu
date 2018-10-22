@@ -1,3 +1,6 @@
+v2.0 - November 2nd, 2016
+o Rewritten to use only hooks in order to gather the required information.
+
 v1.16 - April 4th, 2015
 o Updated for SMF 2.1 Beta 1
 
