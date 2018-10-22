@@ -1,5 +1,5 @@
 [hr]
-[center][color=red][size=16pt][b]LAZY ADMIN MENU v1.2[/b][/size][/color]
+[center][color=red][size=16pt][b]LAZY ADMIN MENU v1.4[/b][/size][/color]
 [url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=http://custom.simplemachines.org/mods/index.php?mod=3901]Link to Mod[/url]
 [/center]
 [hr]
@@ -21,7 +21,13 @@ This mod was tested on [b]SMF 2.0.8[/b], but should work on SMF 2.0 and up.  SMF
 The admin menu on the menu will not be replaced while you are in the Admin area.  The admin area code empties the admin menu cache each page load, thereby forcing the next page load to rebuilt the menu.  Not allowing the menu to be replaced while in the admin area removes this duplication of effort.
 
 [color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
-[b][u]v1.2 - July 21th, 2013[/u][/b]
+[b][u]v1.4 - August 2nd, 2014[/u][/b]
+o 
+
+[b][u]v1.3 - August 1st, 2014[/u][/b]
+o Edited Simple Portal subs file to force loading of the language file....
+
+[b][u]v1.2 - August 1st, 2014[/u][/b]
 o Custom URLs in admin menu are now represented in the top menu...
 o Admin top menu will not be rebuilt while you are in the Admin area.
 o Moved caching code to [b]Subs-LazyAdmin.php[/b] to speed up admin menu replacement...
@@ -32,11 +38,11 @@ o Extended caching time on admin area menu from 2 minutes to 1 day...
 o Fixed undeclared variable issue when using SSI.php...
 o Removed one operation that caused multiple errors with Simple Portal....
 
-[b][u]v1.1 - July 21th, 2013[/u][/b]
+[b][u]v1.1 - July 21th, 2014[/u][/b]
 o Reduced the potential need to load so many files by caching the admin area menu.
 o [b]Subs-LazyAdmin.php[/b] uses the cached version of admin area menu when possible.
 
-[b][u]v1.0 - July 20th, 2013[/u][/b]
+[b][u]v1.0 - July 20th, 2014[/u][/b]
 o Initial Release of the mod
 
 [hr]
