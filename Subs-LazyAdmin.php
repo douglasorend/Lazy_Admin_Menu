@@ -75,7 +75,8 @@ function LazyAdmin_Admin_Hook(&$areas)
 	}
 
 	// Cache the admin menu array for future use:
-	echo serialize($cached);
+	$func = function_exists('safe_serialize') ? 'safe_serialize' : 'serialize';
+	echo $func($cached);
 	exit;
 }
 
@@ -96,11 +97,9 @@ function LazyAdmin_Menu_Buttons(&$areas)
 	if (($cached = cache_get_data('lazyadmin_' . $user_info['id'], 86400)) == null)
 	{
 		$contents = @file_get_contents($scripturl . '?action=admin;area=lazyadmin_acp;u=' . $user_info['id']);
-		if (substr($contents, 0, 2) == 'a:')
-		{
-			$cached = @unserialize($contents);
-			cache_put_data('lazyadmin_' . $user_info['id'], $cached, 86400);
-		}
+		$func = function_exists('safe_unserialize') ? 'safe_unserialize' : 'unserialize';
+		$cached = @$func($contents);
+		cache_put_data('lazyadmin_' . $user_info['id'], $cached, 86400);
 	}
 
 	// Patch up the admin menu so everything works right:

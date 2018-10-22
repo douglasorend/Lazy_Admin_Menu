@@ -1,3 +1,6 @@
+v2.4 - February 26th, 2018
+o Now uses [b]safe_serialize[/b]/[b]safe_unserialize[/b] functions when available.
+
 v2.3 - December 31st, 2016
 o Modified SMF bug fix to make it compatible with upcoming SMF 2.0.13 patch.
 
