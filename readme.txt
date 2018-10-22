@@ -1,5 +1,5 @@
 [hr]
-[center][color=red][size=16pt][b]LAZY ADMIN MENU v1.6[/b][/size][/color]
+[center][color=red][size=16pt][b]LAZY ADMIN MENU v1.7[/b][/size][/color]
 [url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=http://custom.simplemachines.org/mods/index.php?mod=3901]Link to Mod[/url]
 [/center]
 [hr]
@@ -21,6 +21,10 @@ This mod was tested on [b]SMF 2.0.8[/b], but should work on SMF 2.0 and up.  SMF
 The admin menu on the menu will not be replaced while you are in the Admin area.  The admin area code empties the admin menu cache each page load, thereby forcing the next page load to rebuilt the menu.  Not allowing the menu to be replaced while in the admin area removes this duplication of effort.
 
 [color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
+[quote]
+[b][u]v1.7 - September 7th, 2014[/u][/b]
+o Modified Simple Portal language loading code so that it is loaded for mods and global mods.  Thanks, [url=http://www.simplemachines.org/community/index.php?action=profile;u=322341]NekoJonez[/url]!
+
 [b][u]v1.6 - August 21th, 2014[/u][/b]
 o Reverted some code back to v1.1 that detects whether Admin menu should be modified.
 
@@ -51,6 +55,7 @@ o [b]Subs-LazyAdmin.php[/b] uses the cached version of admin area menu when poss
 
 [b][u]v1.0 - July 20th, 2014[/u][/b]
 o Initial Release of the mod
+[/quote]
 
 [hr]
 [url=http://creativecommons.org/licenses/by/3.0][img]http://i.creativecommons.org/l/by/3.0/80x15.png[/img][/url]

@@ -3,7 +3,7 @@
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <name>Lazy Admin Menu</name>
 <id>Dougiefresh:Lazy_Admin</id>
-<version>1.4</version>
+<version>1.7</version>
 
 <file name="$sourcedir/Admin.php">
 	<operation>
@@ -40,7 +40,7 @@
 <file name="$sourcedir/Subs-Portal.php" error="skip">
 	<operation>
 		<search position="replace"><![CDATA[if (!empty($_REQUEST['action']) && in_array($_REQUEST['action'], array('admin', 'helpadmin')))]]></search>
-		<add><![CDATA[if ((!empty($_REQUEST['action']) && in_array($_REQUEST['action'], array('admin', 'helpadmin'))) || $context['user']['is_admin'])]]></add>
+		<add><![CDATA[if ((!empty($_REQUEST['action']) && in_array($_REQUEST['action'], array('admin', 'helpadmin', 'moderate'))) || $context['user']['is_admin'] || in_array(3, $user_info['groups']) || in_array(2, $user_info['groups']))]]></add>
 	</operation>
 </file>
 </modification>
