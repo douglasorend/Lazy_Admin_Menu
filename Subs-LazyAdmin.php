@@ -72,10 +72,10 @@ function LazyAdmin_Menu_Buttons(&$areas)
 
 		// Cache the admin menu array for future use:
 		if (!empty($modSettings['cache_enable']))
-			cache_put_data('admin_menu_' . $user_info['id'], $areas['admin'], 86400);
+			cache_put_data('admin_menu_' . $user_info['id'], $admin['sub_buttons'], 86400);
 	}
 	else
-		$admin = $temp;
+		$admin['sub_buttons'] = $temp;
 
 	// Patch up the admin menu so everything works right:
 	foreach ($areas['admin']['sub_buttons'] as $id1 => $area1)

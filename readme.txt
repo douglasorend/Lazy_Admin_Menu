@@ -22,6 +22,9 @@ The admin menu on the menu will not be replaced while you are in the Admin area.
 
 [color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
 [quote]
+[b][u]v1.9 - October 4th, 2014[/u][/b]
+o Changed caching code from caching entire admin menu to only the sub_buttons of the admin menu.
+
 [b][u]v1.8 - September 8th, 2014[/u][/b]
 o Bug fix for v1.7 did not include globalized variable $user_info within function.
 

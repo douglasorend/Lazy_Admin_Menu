@@ -3,7 +3,7 @@
 <package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
 	<name>Lazy Admin Menu</name>
 	<id>Dougiefresh:Lazy_Admin</id>
-	<version>1.8</version>
+	<version>1.9</version>
 	<type>modification</type>
 
 	<install for="2.0 - 2.0.99">
@@ -11,6 +11,7 @@
 		<code>add_remove_hooks.php</code>
 		<modification>install.xml</modification>
 		<require-file name="Subs-LazyAdmin.php" destination="$sourcedir" />
+		<redirect url="index.php?action=admin;area=maintain;sa=routine;activity=logs" timeout="5000" />
 	</install>
 	<uninstall for="2.0 - 2.0.99">
 		<modification reverse="true">install.xml</modification>
