@@ -3,7 +3,7 @@
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <name>Lazy Admin Menu</name>
 <id>Dougiefresh:Lazy_Admin</id>
-<version>1.13</version>
+<version>1.15</version>
 
 <file name="$sourcedir/Admin.php">
 	<operation>
