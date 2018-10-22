@@ -17,7 +17,7 @@ function LazyAdmin_Menu_Buttons(&$areas)
 	global $sourcedir, $scripturl, $context, $user_info, $modSettings;
 	
 	// Can we do ANYTHING in the admin area?  If not, skip this:
-	if (!$context['user']['is_admin'])
+	if (!$context['allow_admin'])
 		return;
 	$admin = &$areas['admin'];
 	$saved = $admin['sub_buttons']['errorlog']['title'];
