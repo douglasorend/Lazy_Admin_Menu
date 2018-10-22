@@ -3,11 +3,12 @@
 <package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
 	<name>Lazy Admin Menu</name>
 	<id>Dougiefresh:Lazy_Admin</id>
-	<version>1.10</version>
+	<version>1.11</version>
 	<type>modification</type>
 
 	<install for="2.0 - 2.0.99">
 		<readme type="file" parsebbc="true">readme.txt</readme>
+		<code>remove_hooks.php</code>
 		<modification>install.xml</modification>
 		<require-file name="Subs-LazyAdmin.php" destination="$sourcedir" />
 	</install>
@@ -15,4 +16,10 @@
 		<modification reverse="true">install.xml</modification>
 		<remove-file name="$sourcedir/Subs-LazyAdmin.php" />
 	</uninstall>
+	
+	<upgrade from="1.10">
+		<code>remove_hooks.php</code>
+		<modification>upgrade_1.11.xml</modification>
+		<require-file name="Subs-LazyAdmin.php" destination="$sourcedir" />
+	</upgrade>
 </package-info>

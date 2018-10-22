@@ -3,7 +3,7 @@
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <name>Lazy Admin Menu</name>
 <id>Dougiefresh:Lazy_Admin</id>
-<version>1.10</version>
+<version>1.11</version>
 
 <file name="$sourcedir/Admin.php">
 	<operation>
@@ -15,10 +15,20 @@
 	global $txt, $context, $scripturl, $sc, $modSettings, $user_info, $settings, $sourcedir, $options, $smcFunc, $boarddir, $language]]></add>
 	</operation>
 	<operation>
-		<search position="after"><![CDATA[// Make sure the administrator has a valid session...]]></search>
-		<add><![CDATA[// Cache the admin menu array for future use:
+		<search position="replace"><![CDATA[// Define all the menu structure - see Subs-Menu.php for details!]]></search>
+		<add><![CDATA[// Define all the menu structure - see Subs-Menu.php for details!
+if (($admin_areas = cache_get_data('admin_area_' . $user_info['id'])) == null)
+{]]></add>
+	</operation>
+	<operation>
+		<search position="after"><![CDATA[	// Make sure the administrator has a valid session...]]></search>
+		<add><![CDATA[}
+
+	// Cache the admin menu array for future use:
 	if ($menu_only)
 		return $admin_areas;
+	else
+		cache_put_data('admin_menu19_' . $user_info['id'], null);
 		
 	]]></add>
 	</operation>
@@ -35,12 +45,19 @@
 </file>
 <file name="$sourcedir/Subs.php">
 	<operation>
+		<search position="before"><![CDATA[global $context, $modSettings, $user_info, $txt, $scripturl]]></search>
+		<add><![CDATA[, $sourcedir]]></add>
+	</operation>
+	<operation>
 		<search position="replace"><![CDATA[call_integration_hook('integrate_menu_buttons', array(&$buttons));]]></search>
 		<add><![CDATA[call_integration_hook('integrate_menu_buttons', array(&$buttons));
 
-		// BEGIN MOD Real Tabs for Admin/Moderator
-		require_once($sourcedir . '/Subs-LazyAdmin.php');
-		LazyAdmin_Menu_Buttons($buttons);]]></add>
+		// Execute the Lazy Admin Menu hook right here:
+		if (file_exists($sourcedir . '/Subs-LazyAdmin.php'))
+		{
+			require_once($sourcedir . '/Subs-LazyAdmin.php');
+			LazyAdmin_Menu_Buttons($buttons);
+		}]]></add>
 	</operation>
 </file>
 <file name="$sourcedir/Subs-Portal.php" error="skip">

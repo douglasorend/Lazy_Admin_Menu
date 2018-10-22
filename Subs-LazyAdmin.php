@@ -14,7 +14,7 @@ if (!defined('SMF'))
 **********************************************************************************/
 function LazyAdmin_Menu_Buttons(&$areas)
 {
-	global $sourcedir, $scripturl, $context, $user_info, $modSettings;
+	global $sourcedir, $scripturl, $context, $user_info, $modSettings, $txt;
 	
 	// Can we do ANYTHING in the admin area?  If not, skip this:
 	if (!$context['allow_admin'])
@@ -23,7 +23,7 @@ function LazyAdmin_Menu_Buttons(&$areas)
 	$saved = $admin['sub_buttons']['errorlog']['title'];
 
 	// Retrieve the admin area menu, either from cache or the Admin.php script...
-	if (($temp = cache_get_data('admin_menu19_' . $user_info['id'], 86400)) == null)
+	if (($admin['sub_buttons'] = cache_get_data('admin_menu19_' . $user_info['id'], 86400)) == null)
 	{
 		require_once($sourcedir . '/Admin.php');
 		$admin_areas = AdminMain(true);
@@ -74,18 +74,16 @@ function LazyAdmin_Menu_Buttons(&$areas)
 		if (!empty($modSettings['cache_enable']))
 			cache_put_data('admin_menu19_' . $user_info['id'], $admin['sub_buttons'], 86400);
 	}
-	else
-		$admin['sub_buttons'] = $temp;
 
 	// Patch up the admin menu so everything works right:
-	foreach ($areas['admin']['sub_buttons'] as $id1 => $area1)
+	foreach ($admin['sub_buttons'] as $id1 => $area1)
 	{
-		if (isset($areas['admin']['sub_buttons'][$id1]['href']))
-			$areas['admin']['sub_buttons'][$id1]['href'] .= ';' . $context['session_var'] . '=' . $context['session_id'];
-		foreach ($areas['admin']['sub_buttons'][$id1]['sub_buttons'] as $id2 => $area2)
+		if (isset($admin['sub_buttons'][$id1]['href']))
+			$admin['sub_buttons'][$id1]['href'] .= ';' . $context['session_var'] . '=' . $context['session_id'];
+		foreach ($admin['sub_buttons'][$id1]['sub_buttons'] as $id2 => $area2)
 		{
-			if (isset($areas['admin']['sub_buttons'][$id1]['sub_buttons'][$id2]['href']))
-				$areas['admin']['sub_buttons'][$id1]['sub_buttons'][$id2]['href'] .= ';' . $context['session_var'] . '=' . $context['session_id'];
+			if (isset($admin['sub_buttons'][$id1]['sub_buttons'][$id2]['href']))
+				$admin['sub_buttons'][$id1]['sub_buttons'][$id2]['href'] .= ';' . $context['session_var'] . '=' . $context['session_id'];
 		}
 	}
 

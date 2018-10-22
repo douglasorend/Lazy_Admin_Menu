@@ -1,5 +1,5 @@
 [hr]
-[center][color=red][size=16pt][b]LAZY ADMIN MENU v1.10[/b][/size][/color]
+[center][color=red][size=16pt][b]LAZY ADMIN MENU v1.11[/b][/size][/color]
 [url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=http://custom.simplemachines.org/mods/index.php?mod=3901]Link to Mod[/url]
 [/center]
 [hr]
@@ -18,10 +18,15 @@ o [url=http://www.simplemachines.org/community/index.php?topic=400767][TIP] Lazy
 [color=blue][b][size=12pt][u]Compatibility Notes[/u][/size][/b][/color]
 This mod was tested on [b]SMF 2.0.8[/b], but should work on SMF 2.0 and up.  SMF 1.1 is not and will not be supported, so please don't ask.
 
-The admin menu on the menu will not be replaced while you are in the Admin area.  The admin area code empties the admin menu cache each page load, thereby forcing the next page load to rebuilt the menu.  Not allowing the menu to be replaced while in the admin area removes this duplication of effort.
+DO NOT ATTEMPT TO UNINSTALL VERSION 1.10!!!  Upgrade from v1.10 to 1.11 to keep from screwing up your forum!!!!
 
 [color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
 [quote]
+[b][u]v1.11 - October 6th, 2014[/u][/b]
+o Added some code to [b]Subs.php[/b] to prevent screwing up forum during uninstallation of mod.
+o Upgrade possible from v1.10 to v1.11 since uninstalling mod screws up the forum.
+o Added code for 2-second cache to the admin area to prevent double code execution...
+
 [b][u]v1.10 - October 5th, 2014[/u][/b]
 o Modified SimplePortal so that the language file will hopefully be loaded if the user can adminstrate anything...
 o Moved Lazy Admin Menu hook to [b]Subs.php[/b] to make sure additions made after it show up.

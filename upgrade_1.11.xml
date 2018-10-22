@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+<name>Lazy Admin Menu</name>
+<id>Dougiefresh:Lazy_Admin</id>
+<version>1.11</version>
+
+<file name="$sourcedir/Subs.php">
+	<operation>
+		<search position="replace"><![CDATA[call_integration_hook('integrate_menu_buttons', array(&$buttons));
+
+		// BEGIN MOD Real Tabs for Admin/Moderator
+		require_once($sourcedir . '/Subs-LazyAdmin.php');
+		LazyAdmin_Menu_Buttons($buttons);]]></search>
+		<add><![CDATA[call_integration_hook('integrate_menu_buttons', array(&$buttons));
+
+		// Execute the Lazy Admin Menu hook right here:
+		if (file_exists($sourcedir . '/Subs-LazyAdmin.php'))
+		{
+			require_once($sourcedir . '/Subs-LazyAdmin.php');
+			LazyAdmin_Menu_Buttons($buttons);
+		}]]></add>
+	</operation>
+</file>
+</modification>
